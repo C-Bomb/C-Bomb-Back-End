@@ -106,6 +106,15 @@ public class InitDb {
 					.posterPath("/images/soul.jpg")
 					.build();
 			em.persist(movie4);
+
+			Movie movie5 = Movie.builder()
+					.name("2분걸리는 영화")
+					.runningTime(2)
+					.openDate(LocalDate.of(2022, 4, 27))
+					.infoLink("https://movie.naver.com/movie/bi/mi/basic.naver?code=215791")
+					.posterPath("/images/soul.jpg")
+					.build();
+			em.persist(movie5);
 		}
 
 		;
@@ -210,6 +219,15 @@ public class InitDb {
 					.build();
 			screeningMovieService.saveScreeningMovieService(screeningMovie11);
 
+			ScreeningMovie screeningMovie12 = ScreeningMovie.builder()
+					.startTime(LocalDateTime.now())
+					.endTime(LocalDateTime.of(2022, 4, 28, 20, 38))
+					.theaterNumber(5)
+					.theater(theaterRepository.findByName("메가박스 전대").get())
+					.movie(movieRepository.findByName("2분걸리는 영화").get())
+					.build();
+			screeningMovieService.saveScreeningMovieService(screeningMovie12);
+
 		}
 
 		public void setUsers() {
@@ -241,6 +259,27 @@ public class InitDb {
 					.user(userRepository.findByUsername("userB").get())
 					.build();
 			em.persist(userC);
+
+			ChatRoom testChatRoom = ChatRoom.builder()
+					.maxParticipant(4)
+					.screeningMovie(screeningMovieRepository.findFirstByOrderByIdDesc())
+					.build();
+			em.persist(testChatRoom);
+			ChatParticipant testUserA = ChatParticipant.builder()
+					.chatRoom(testChatRoom)
+					.user(userRepository.findByUsername("userA").get())
+					.build();
+			em.persist(testUserA);
+			ChatParticipant testUserB = ChatParticipant.builder()
+					.chatRoom(testChatRoom)
+					.user(userRepository.findByUsername("userB").get())
+					.build();
+			em.persist(testUserB);
+			ChatParticipant testUserC = ChatParticipant.builder()
+					.chatRoom(testChatRoom)
+					.user(userRepository.findByUsername("userB").get())
+					.build();
+			em.persist(testUserC);
 		}
 
 		public void setAdmin() {

@@ -16,9 +16,9 @@ public class EvaluationController {
 
     @GetMapping("/theater/{theaterId}/{screeningMovieId}/chatRooms/{chatRoomId}/evaluation")
     public String evaluationPage(@PathVariable Long chatRoomId) {
-        try{
-            chatRoomRepository.findById(chatRoomId).orElseThrow();}
-        catch (Exception e){
+        try {
+            chatRoomRepository.findById(chatRoomId).orElseThrow();
+        } catch (Exception e) {
             return "evalEnd";
         }
         return "mannerEval";
