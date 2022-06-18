@@ -1,6 +1,6 @@
 package com.fireprohibition.CBomb.web.controller;
 
-import com.fireprohibition.CBomb.domain.chat.MessageType;
+import com.fireprohibition.CBomb.domain.chat.ChatRoom;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -46,8 +46,12 @@ public class ChatRoomController {
 
 	@GetMapping("/theater/{theaterId}/{screeningMovieId}/chatRooms/{chatRoomId}")
 	public String detailChatRoom(@PathVariable Long chatRoomId, Model model) {
+		ChatRoom chatRoom = chatRoomService.findById(chatRoomId);
+		if (screeningMovieService.isFished(chatRoomId)) {
+			return "redirect:"+chatRoomId+"/evaluation";
+		}
+		model.addAttribute("room", chatRoom);
 		model.addAttribute("lastMessages", messageService.findByChatRoom(chatRoomId));
-		model.addAttribute("room", chatRoomService.findById(chatRoomId));
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String name = authentication.getName();
 		model.addAttribute("userName", name);

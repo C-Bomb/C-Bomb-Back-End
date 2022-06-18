@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 
+import com.fireprohibition.CBomb.service.ScreeningMovieService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +51,8 @@ public class InitDb {
 		private final TheaterRepository theaterRepository;
 		private final RegisterService registerService;
 		private final UserRepository userRepository;
-		private final ScreeningMovieRepository ScreeningMovieRepository;
+		private final ScreeningMovieRepository screeningMovieRepository;
+		private final ScreeningMovieService screeningMovieService;
 
 		public void setTheaters() {
 			Theater theater1 = Theater.builder()
@@ -116,7 +118,8 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.theaterNumber(1)
 					.build();
-			em.persist(screeningMovie1);
+			screeningMovieService.saveScreeningMovieService(screeningMovie1);
+
 			ScreeningMovie screeningMovie2 = ScreeningMovie.builder()
 					.movie(movieRepository.findByName("니 부모 얼굴이 보고싶다.").get())
 					.startTime(LocalDateTime.of(2022, 4, 28, 18, 50))
@@ -124,7 +127,8 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.theaterNumber(1)
 					.build();
-			em.persist(screeningMovie2);
+			screeningMovieService.saveScreeningMovieService(screeningMovie2);
+
 			ScreeningMovie screeningMovie3 = ScreeningMovie.builder()
 					.movie(movieRepository.findByName("니 부모 얼굴이 보고싶다.").get())
 					.startTime(LocalDateTime.of(2022, 4, 28, 21, 10))
@@ -132,7 +136,7 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.theaterNumber(1)
 					.build();
-			em.persist(screeningMovie3);
+			screeningMovieService.saveScreeningMovieService(screeningMovie3);
 
 			ScreeningMovie screeningMovie4 = ScreeningMovie.builder()
 					.movie(movieRepository.findByName("니 부모 얼굴이 보고싶다.").get())
@@ -141,7 +145,8 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.theaterNumber(6)
 					.build();
-			em.persist(screeningMovie4);
+			screeningMovieService.saveScreeningMovieService(screeningMovie4);
+
 			ScreeningMovie screeningMovie5 = ScreeningMovie.builder()
 					.startTime(LocalDateTime.of(2022, 4, 28, 17, 40))
 					.endTime(LocalDateTime.of(2022, 4, 28, 18, 41))
@@ -149,7 +154,8 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.movie(movieRepository.findByName("니 부모 얼굴이 보고싶다.").get())
 					.build();
-			em.persist(screeningMovie5);
+			screeningMovieService.saveScreeningMovieService(screeningMovie5);
+
 			ScreeningMovie screeningMovie6 = ScreeningMovie.builder()
 					.startTime(LocalDateTime.of(2022, 4, 28, 20, 00))
 					.endTime(LocalDateTime.of(2022, 4, 28, 22, 01))
@@ -157,7 +163,7 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.movie(movieRepository.findByName("니 부모 얼굴이 보고싶다.").get())
 					.build();
-			em.persist(screeningMovie6);
+			screeningMovieService.saveScreeningMovieService(screeningMovie6);
 
 			ScreeningMovie screeningMovie7 = ScreeningMovie.builder()
 					.startTime(LocalDateTime.of(2022, 4, 28, 17, 20))
@@ -166,7 +172,8 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.movie(movieRepository.findByName("신기한 동물들과 덤블도어의 비밀").get())
 					.build();
-			em.persist(screeningMovie7);
+			screeningMovieService.saveScreeningMovieService(screeningMovie7);
+
 			ScreeningMovie screeningMovie8 = ScreeningMovie.builder()
 					.startTime(LocalDateTime.of(2022, 4, 28, 20, 10))
 					.endTime(LocalDateTime.of(2022, 4, 28, 22, 42))
@@ -174,7 +181,7 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.movie(movieRepository.findByName("신기한 동물들과 덤블도어의 비밀").get())
 					.build();
-			em.persist(screeningMovie8);
+			screeningMovieService.saveScreeningMovieService(screeningMovie8);
 
 			ScreeningMovie screeningMovie9 = ScreeningMovie.builder()
 					.movie(movieRepository.findByName("신기한 동물들과 덤블도어의 비밀").get())
@@ -183,7 +190,8 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.theaterNumber(7)
 					.build();
-			em.persist(screeningMovie9);
+			screeningMovieService.saveScreeningMovieService(screeningMovie9);
+
 			ScreeningMovie screeningMovie10 = ScreeningMovie.builder()
 					.startTime(LocalDateTime.of(2022, 4, 28, 21, 0))
 					.endTime(LocalDateTime.of(2022, 4, 28, 23, 32))
@@ -191,7 +199,7 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.movie(movieRepository.findByName("신기한 동물들과 덤블도어의 비밀").get())
 					.build();
-			em.persist(screeningMovie10);
+			screeningMovieService.saveScreeningMovieService(screeningMovie10);
 
 			ScreeningMovie screeningMovie11 = ScreeningMovie.builder()
 					.startTime(LocalDateTime.of(2022, 4, 28, 18, 40))
@@ -200,7 +208,8 @@ public class InitDb {
 					.theater(theaterRepository.findByName("메가박스 전대").get())
 					.movie(movieRepository.findByName("공기살인").get())
 					.build();
-			em.persist(screeningMovie11);
+			screeningMovieService.saveScreeningMovieService(screeningMovie11);
+
 		}
 
 		public void setUsers() {
@@ -214,22 +223,22 @@ public class InitDb {
 		public void setChatRooms() {
 			ChatRoom chatRoom = ChatRoom.builder()
 					.maxParticipant(4)
-					.screeningMovie(ScreeningMovieRepository.findFirstByOrderByIdDesc())
+					.screeningMovie(screeningMovieRepository.findFirstByOrderByIdDesc())
 					.build();
 			em.persist(chatRoom);
 			ChatParticipant userA = ChatParticipant.builder()
 					.chatRoom(chatRoom)
-					.user(userRepository.findByUsername("UserA").get())
+					.user(userRepository.findByUsername("userA").get())
 					.build();
 			em.persist(userA);
 			ChatParticipant userB = ChatParticipant.builder()
 					.chatRoom(chatRoom)
-					.user(userRepository.findByUsername("UserB").get())
+					.user(userRepository.findByUsername("userB").get())
 					.build();
 			em.persist(userB);
 			ChatParticipant userC = ChatParticipant.builder()
 					.chatRoom(chatRoom)
-					.user(userRepository.findByUsername("UserB").get())
+					.user(userRepository.findByUsername("userB").get())
 					.build();
 			em.persist(userC);
 		}

@@ -1,0 +1,113 @@
+.loginForm * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+.loginForm  ul,
+  li {
+    list-style: none;
+  }
+.loginForm  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .loginForm input {
+    display: block;
+  }
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: auto;
+    margin: 200px auto 0;
+    padding: 20px 30px 30px;
+    background: whitesmoke;
+    color: black;
+    font-size: 14px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    align-items: center;
+  }
+  .loginForm h1 {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #f45c5c;
+    font-weight: 800;
+  }
+  .loginForm h3 {
+    align-self: center;
+    margin: 15px 10px 10px 10px;
+  }
+  .loginForm h4 {
+    margin: 15px 10px 5px 10px;
+  }
+  .loginForm form input {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    outline: none;
+    
+    border-radius: 20px;
+  }
+  .loginForm form input[type="password"] {
+    margin: 15px 0;
+  }
+  .loginForm form input::placeholder {
+    color: #9fa3a6;
+  }
+  .loginForm form input[type="checkbox"]{
+    width: 20px; /*Desired width*/
+    display:inline-block;
+    vertical-align: -20px;
+  }
+  .loginForm .login_submit {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    outline: none;
+    position: relative;
+    margin-bottom: 5px;
+    background: white;
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #f56a6a;
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+  .loginForm .login_submit:hover {
+    background: #f56a6a;
+    color: white;
+  }
+  .loginForm .forgot {
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+  .loginForm .forgot a:hover {
+    text-decoration-line: underline;
+  }
+  .login_sns {
+    padding: 20px;
+    display: flex;
+    align-self: center;
+  }
+  
+  .login_sns li {
+    padding: 0px 15px;
+  }
+  
+  .login_sns a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: white;
+    font-size: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
+  }

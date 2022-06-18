@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/assets/css/manner.css}" href="../static/assets/css/manner.css">
+
+</head>
+<body>
+<form method="post">
+    <div class="slide-container">
+        <h1>평가 항목 1</h1>
+        <input type="range" min="0" max="100" value="0" step="5" class="slider" id="rating1">
+        <p>점수: <span id="value1"></span></p>
+    </div>
+
+    <div class="slide-container">
+        <h1>평가 항목 2</h1>
+        <input type="range" min="0" max="100" value="0" step="5" class="slider" id="rating2">
+        <p>점수: <span id="value2"></span></p>
+    </div>
+
+    <div class="submit-button">
+        <input class="manner_submit" type="submit" value="평가완료">
+    </div>
+</form>
+</body>
+
+<script th:inline="javascript">
+    let rating1 = document.getElementById("rating1");
+    let value1 = document.getElementById("value1");
+    value1.innerHTML = rating1.value;
+
+    rating1.oninput = function() {
+        value1.innerHTML = this.value;
+    }
+
+    let rating2 = document.getElementById("rating2");
+    let value2 = document.getElementById("value2");
+    value2.innerHTML = rating2.value;
+
+    rating2.oninput = function() {
+        value2.innerHTML = this.value;
+    }
+
+</script>
+</html>

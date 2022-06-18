@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/assets/css/loginForm.css}">
+    <title>로그인</title>
+</head>
+
+<div class="loginForm">
+    <h1><a th:href="@{/index}">C - BomB</a></h1>
+    <form action="/login" method="post">
+        <h4>아이디</h4>
+        <div class="login_id">
+            <input type="text" name="username" id="username" placeholder="Id">
+        </div>
+
+        <h4>비밀번호</h4>
+        <div class="login_pw">
+            <input type="password" name="password" id="password" placeholder="Password">
+        </div>
+
+        <div class="login_etc">
+            <input type="checkbox">
+            <span>아이디 저장</span>
+        </div>
+
+        <input class="login_submit" type="submit" value="LOGIN">
+        <div class="forgot">
+            <a th:href="@{/register}">회원가입</a>
+            <a href="#">아이디/비밀번호 찾기</a>
+        </div>
+
+        <h3>간편 로그인</h3>
+        <div class="login_sns">
+            <li><a href="">네이버</a></li>
+            <li><a href="">카카오</a></li>
+            <li><a href="">구글</a></li>
+        </div>
+
+    </form>
+</div>
+</html>

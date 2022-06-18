@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>씨밤-폭발하는 채팅창</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}" href="../static/assets/css/main.css"/>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="/index" class="logo">C - BomB 폭발하는 채팅방</a>
+                <ul class="icons">
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout">로그아웃</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()">
+                        <a href="/login">로그인</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/register">내 정보</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()">
+                        <a href="/register">회원가입</a>
+                    </li>
+                </ul>
+            </header>
+
+            <!-- Section -->
+            <section>
+                <header class="major">
+                    <img src="../images/pic01.jpg" alt=""/>
+                    <h2 >채팅방리스트</h2>
+                </header>
+                <div class="posts">
+                    <article th:each="chatRoom : ${chatRooms}">
+                        <p>
+                            영화관 : [[${theater.name}]]<br>
+                            상영시간 : [[${#temporals.format(screeningMovie.startTime, 'MM-dd HH:mm')}]] ~ [[${#temporals.format(screeningMovie.endTime, 'MM-dd HH:mm')}]]<br>
+                            상영관 : [[${screeningMovie.theaterNumber}]]<br>
+                            참여중인사람 : [[${chatRoom.chatParticipants.size()}]]/[[${chatRoom.maxParticipant}]]
+                        </p>
+                        <ul class="actions">
+                            <li><a id="open" th:href="@{'/theater/'+${theater.id}+'/'+${screeningMovie.id}+'/chatRooms/'+${chatRoom.id}}" class="button"
+                                   onclick="window.open(this.href, '_blank', 'width=350, height=600'); return false;">
+                                채팅방 입장</a>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="posts">
+                    <article>
+                    <form method="post">
+                        <button class="btn btn-secondary">개설하기</button>
+                    </form>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Section -->
+            <section>
+                <header class="major">
+                    <h2>소개</h2>
+                </header>
+                <p>연락처</p>
+                <ul class="contact">
+                    <li class="icon solid fa-envelope"><a href="#">
+                        구태희 : rnxogml3000@naver.com<br>
+                        조인혁 : alzpqm@naver.com
+                    </a></li>
+                    <li class="icon solid fa-phone">010-0000-0000</li>
+                    <li class="icon solid fa-home">광주광역시 용봉로 77 전남대학교</li>
+                </ul>
+            </section>
+
+
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="inner">
+
+            <!-- Search -->
+            <section id="search" class="alt">
+                <form method="post" action="#">
+                    <input type="text" name="query" id="query" placeholder="Search"/>
+                </form>
+            </section>
+
+            <!-- Menu -->
+            <nav id="menu">
+                <header>
+                    <h2>영화관 선택</h2>
+                </header>
+                <ul>
+                    <li><a href="#">서울</a></li>
+                    <li><a href="#">경기</a></li>
+                    <li><a href="#">인천</a></li>
+                    <li><a href="#">부산</a></li>
+                    <li>
+                        <span class="opener">광주</span>
+                        <ul>
+                            <li><a href="#">동구</a></li>
+                            <li><a href="#">서구</a></li>
+                            <li><a href="#">남구</a></li>
+                            <li><a href="/theater?">북구</a></li>
+                            <li><a href="#">광산구</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">대구/경북</a></li>
+                    <li><a href="#">울산/경남</a></li>
+                    <li><a href="#">전남/전북</a></li>
+                    <li><a href="#">대전/충청/세종</a></li>
+                    <li><a href="#">강원/제주</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.min.js}" src="../static/assets/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script type="text/javascript" th:src="@{/assets/js/browser.min.js}" src="../static/assets/js/browser.min.js"></script>
+<script type="text/javascript" th:src="@{/assets/js/breakpoints.min.js}" src="../static/assets/js/breakpoints.min.js"></script>
+<script type="text/javascript" th:src="@{/assets/js/util.js}" src="../static/assets/js/util.js"></script>
+<script type="text/javascript" th:src="@{/assets/js/main.js}" src="../static/assets/js/main.js"></script>
+
+</body>
+</html>

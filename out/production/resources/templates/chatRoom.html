@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/assets/css/chatRoom.css}" href="../static/assets/css/chatRoom.css">
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<div class="chat_wrap">
+    <div class="header">
+        CHAT
+    </div>
+    <div id="chatBox" class="chat">
+        <ul>
+            <li th:each="lastMessage : ${lastMessages}"
+                th:class="${lastMessage.user.username == userName
+                and lastMessage.messageType.name() == T(com.fireprohibition.CBomb.domain.chat.MessageType).TALK.name()}? 'right':'left'"
+                th:classappend="${lastMessage.messageType.name() == T(com.fireprohibition.CBomb.domain.chat.MessageType).ENTER.name()}? 'center'">
+                <div class="sender">
+                    <span th:if="${lastMessage.messageType.name() == T(com.fireprohibition.CBomb.domain.chat.MessageType).TALK.name()}"
+                          th:text="${lastMessage.user.username}">
+                    </span>
+                </div>
+                <div class="message">
+                    <span>
+                        [[${lastMessage.text}]]
+                    </span>
+                </div>
+            </li>
+        </ul>
+        <ul id="newChat">
+            <!-- new chat-->
+        </ul>
+    </div>
+    <div class="input-div">
+        <textarea id="send" placeholder="Press Enter for send message."></textarea>
+    </div>
+</div>
+</body>
+</html>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function () {
+
+        var roomId = [[${room.id}]];
+        var username = [[${userName}]];
+
+        var sockJs = new SockJS("/stomp/chat");
+        //1. SockJS를 내부에 들고있는 stomp를 내어줌
+        var stomp = Stomp.over(sockJs);
+
+        //2. connection이 맺어지면 실행
+        stomp.connect({}, function () {
+            //4. subscribe(path, callback)으로 메세지를 받을 수 있음
+            stomp.subscribe("/sub/chat/room/" + roomId, function (chat) {
+                var content = JSON.parse(chat.body);
+
+                var type = content.type;
+                var name = content.writer;
+                var text = content.message;
+                var str = '';
+
+                if(type === "ENTER"){
+                    str = "<li class='center'>";
+                }
+                else{
+                    if (name === username) {
+                        str = "<li class='right'><div class='sender'><span>"
+                            + name + "</span></div>";
+                    } else {
+                        str = "<li class='left'><div class='sender'><span>"
+                            + name + "</span></div>";
+                    }
+                }
+                str +="<div class='message'><span>" + text + "</span></div></li>"
+
+                $("#newChat").append(str)
+
+                // 스크롤바 아래 고정
+                let chatBox = document.getElementById("chatBox");
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+            });
+
+            //3. send(path, header, message)로 메세지를 보낼 수 있음
+            stomp.send('/pub/chat/enter', {}, JSON.stringify({type: 'ENTER',roomId: roomId, writer: username}))
+        });
+
+        $("#send").on('keydown', function(e){
+            if(e.keyCode == 13 && !e.shiftKey) {
+                e.preventDefault();
+                var msg =document.getElementById("send");
+
+                //메시지 전송
+                stomp.send('/pub/chat/message', {}, JSON.stringify({
+                    type: 'TALK',
+                    roomId: roomId,
+                    message: msg.value,
+                    writer: username
+                }));
+                msg.value = '';
+                clearTextarea();
+            }
+        });
+
+        //입력박스 지우기
+        function clearTextarea() {
+            $('div.input-div textarea').val('');
+        }
+    });
+    /*]]>*/
+</script>

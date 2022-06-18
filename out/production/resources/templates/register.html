@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/assets/css/registerForm.css}">
+    <title>회원가입</title>
+</head>
+<div class="registerForm">
+    <h1><a th:href="@{/}">C - BomB</a></h1>
+    <h1>회원 가입</h1>
+    <form action="/register" method="post">
+
+        <h4>이름 입력</h4>
+        <div class="user_name">
+            <input type="text" id="name" class="form-control" name = "name"
+                   placeholder="Id">
+        </div>
+
+        <h4>생일 입력</h4>
+        <div class="user_birth">
+            <input type="date" id="birth" class="form-control" name = "birth"
+                   placeholder="Id">
+        </div>
+
+        <h4>아이디 입력</h4>
+        <div class="user_id">
+            <input type="text" id="username" class="form-control" name = "username"
+                   placeholder="Id">
+            <button type="button" class="checkDupleId" onclick="">아이디 중복 체크</button>
+        </div>
+<!--        <div class="field-error" th:errors="*{username}">-->
+<!--            username오류-->
+<!--        </div>-->
+        <!--        아이디 중복체크 버튼을 다른 URL로 요청보내서 물어봐야함 -->
+        <!--        URL=/register/find-same-name, RequestParam=username, return=False(중복있음)/True(중복없음) -->
+
+        <h4>비밀번호 입력</h4>
+        <div class="user_pw">
+            <input type="password" id="password" class="form-control" name="password"
+                   placeholder="Password">
+        </div>
+
+        <h4>비밀번호 확인</h4>
+        <div class="user_pw">
+            <input type="password" id="passwordCheck" class="form-control" name="passwordCheck"
+                   placeholder="Password">
+        </div>
+<!--        <div class="field-error" th:errors="*{passwordCheck}">-->
+<!--            passwordCheck오류-->
+<!--        </div>-->
+        <!--        비밀번호 확인란에서 앞서 입력한 비밀번호와 동일한지 확인(프론트엔드에서 수행)-->
+
+        <h4>e-mail 입력</h4>
+        <div class="user_email">
+            <input type="email" id="email" class="form-control" name="email"
+                   placeholder="e-mail">
+        </div>
+
+        <h4>핸드폰 번호 입력</h4>
+        <div class="user_phone">
+            <input type="tel" id="phone" class="form-control" name="phone"
+                   placeholder="000-0000-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13">
+        </div>
+
+
+
+        <input class="register_submit" type="submit" value="REGISTER">
+    </form>
+</div>
+</html>
+

@@ -29,10 +29,20 @@ public class ChatRoomService {
 		return chatRoomRepository.findById(id).get();
 	}
 
+	public ScreeningMovie findScreeningMovieById(Long id) {
+		return chatRoomRepository.findById(id).get().getScreeningMovie();
+	}
+
 	@Transactional
 	public Long createChatRoom(Long screeningMovieId) {
 		ScreeningMovie screeningMovie = screeningMovieRepository.findById(screeningMovieId).get();
 		ChatRoom chatRoom = new ChatRoom(4, screeningMovie);
 		return chatRoomRepository.save(chatRoom).getId();
 	}
+
+	@Transactional
+	public void removeChatRoom(Long chatRoomId) {
+		chatRoomRepository.deleteById(chatRoomId);
+	}
+
 }
